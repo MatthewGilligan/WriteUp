@@ -18,4 +18,20 @@ This is new syntax for me, but the way that I understand it is that fetch makes 
 This two-liner was able to get the breakout game to print out the key, which we submitted for 40 points. 
 
 ## Part 2: Raffle game
-This is more text (I will expand on this later)
+For the second game we were presented with a roulette style game, with a 5 slots, each with the potential to generate an integer from 0-9. There was an area for player input that would only accept integers, with two arrows that could raise or lower the integer. Seeing as this game would take hours to get the flag by just guessing, we needed to hack in to get the flag. This time, we found that the code was located in the backend serverside code. We downloaded it from the link given to us in the Discord message and began examining how the game functioned. We found out that at the start of the game 5 numbers were randomly generated, then saved in an array and compared to a player input to check to see if the player guessed all 5 correctly. We searched for the flag and found that it was gaurded by 5 separate if statements. These if statements checked 3 things, and if any of them were TRUE would deny the flag. This meant that if all of them were false, we would get the flag. The if statements checked:
+
+1) If a player input didn't exist
+2) If the player input was greater than the value of the number stored in the array slot
+3) If the player input was less than the value of the number stored in the array slot.
+   
+Both condition 2 and condition 3 used the "parseInt()" function in JavaScript in order to get the number for the player input. 
+We thought that it was odd that it didn't just check if the player input was equal to the randomly generated number, so we examined a little closer, and one of us realized that the parseInt() function will always evaluate to false if fed a non-integer value.
+We used a similar strategy as the first flag, creating a const, assigning it with values, then calling that value, making the game use our generated value as opposed to randomly generated values. Our code was:
+
+const data = await fetch('/raffle?field1=@&field2=@&field3=@&field4=@&field5=@');
+alert(await data.text());
+
+We used the "@" symbol, but any non-integer would've worked. So long as it made the parseInt() function evaluate to false. We needed to fetch (ask for website information) with our 5 values as substitutes for the 5 parameters taken by the if statements. After alerting and causing the webiste to print, we obtained the key, which we submitted for 60 points. 
+
+## Reflection
+I'm very happy to have been able to solve these first exercises with my group, and I'm incredibly grateful for all the support from my team and the coaches. I'm looking forward to next week's flags and I hope that I get another great group to work with and learn from!
