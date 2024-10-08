@@ -22,7 +22,7 @@ su stands for switch user, and it switches to a specified user account. This is 
 
 man stands for manual, and allows for more complex commands. We used man to add extra commands to grep and other commands. I still don't fully understand man, but I do realize that it is complicated and allows for a lot more user control. 
 
-Overall, these were the commands that we learned at meet 2, and were all of the commands that we needed to solve this challenge.
+Overall, these were the commands that we learned at meet 2, and were all of the commands that we needed to solve this challenge. 
 ## Overview
 After using "ssh chal@elevator.ctf-league.osusec.org -p 1302" to access
 ## Challenge of the week
