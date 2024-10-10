@@ -24,8 +24,8 @@ man stands for manual, and allows for more complex commands. We used man to add 
 
 Overall, these were the commands that we learned at meet 2, and were all of the commands that we needed to solve this challenge. 
 ## Overview
-After using "ssh chal@elevator.ctf-league.osusec.org -p 1302" to access
+After using "ssh chal@elevator.ctf-league.osusec.org -p 1302" to access the challenge, we were tasked with hacking 7 accounts, each with a different way of accessing their information. We needed to use linux commands in order to get the name and password of the account, which would allow us to switch user in order to access different information. This "segmented" approach was made to resemble elavator floors. This way of separating information and uncovering more and more information through different users is a common offensive security practice.
 ## Challenge of the week
-We needed to hack 7 accounts, represented by "elavator floors".
+For the first level, we typed "imready" after authenticating to the shell. We found a directory called "creds_level0". 
 ## Reflection
  I'm very grateful for all the support from my team, the coaches and the team next to me. 
