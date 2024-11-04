@@ -9,21 +9,22 @@ This week was really fun, as we got to do reverse engineering. This was exciting
 ELF is a common file format for executables (any file that contains a program), object code (the "intermeditate level" output compiled from high level code into machine code or bytecode. The computer can process it, but it is not yet an executable), shared libraries (collections of code/data that can be used by multiple programs simultaneously), and core dumps (captures of a program's memory at a specific point, usually at the time of a crash). ELFs contain multiple sections such as:
 
 ##### Headers:
-Describes the segments of the program that are loaded into memory. Each entry specifies where the segment is located in the file, and at what exact location it should be placed into the memory. 
+Describes the segments of the program that are loaded into memory. Each entry specifies where the segment is located in the file, and at what exact location it should be placed into the memory.
 
-##### .text:
+#### Data sections of ELFs
+###### .text:
 Contains the executable code.
 
-##### .data:
+###### .data:
 Contains initialized data.
 
-##### .bss: 
+###### .bss: 
 Contains uninitialized data.
 
-##### .rodata: 
+###### .rodata: 
 Read-only data, such as constants.
 
-##### .comment: 
+###### .comment: 
 Metadata or additional comments. 
 
 ##### Section Header Table: 
