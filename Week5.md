@@ -9,7 +9,7 @@ This week was really fun, as we got to do reverse engineering. This was exciting
 ELF is a common file format for executables (any file that contains a program), object code (the "intermeditate level" output compiled from high level code into machine code or bytecode. The computer can process it, but it is not yet an executable), shared libraries (collections of code/data that can be used by multiple programs simultaneously), and core dumps (captures of a program's memory at a specific point, usually at the time of a crash). ELFs contain multiple sections such as:
 
 ##### Headers:
-Describes the segments of the program that are loaded into memory. Each entry specifies where the segment is located in the file, and at what exact location it should be placed into the memory.
+Describes the segments of the program that are loaded into memory. Each entry specifies where the segment is located in the file, and at what exact location it should be placed into the memory. 
 
 #### Data sections of ELFs
 ###### .text:
@@ -31,7 +31,7 @@ Metadata or additional comments.
 Describes the sections and their attributes (size, location, alignment)
 
 #### How ELFs actually work
-ELFs use a process called Linking & Loading in order to combine object files into an executable. It will then use the loader to read the headers and load the program into memory based off of what it reads. 
+ELFs use a process called Linking & Loading in order to combine object files into an executable. It will then use the loader to read the headers and load the program into memory based off of what it reads. You can think of an ELF file like a recipie book: outlining what resources a program needs, telling the computer how to load the program into memory and run it, and all of the instructions to make it work.
 
 
 ### Ghidra
