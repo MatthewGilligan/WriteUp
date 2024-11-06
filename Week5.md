@@ -36,7 +36,7 @@ ELFs use a process called Linking & Loading in order to combine object files int
 ### Ghidra
 Ghidra is a reverse engineering tool devleoped by the NSA, and allows for people to analyze code even if they don't have the original source code. Ghidra takes an ELF file "rips it apart limb by limb" and turns it back into C code. This causes the memory and string compare to be really messed up, but allows for a "guess" of what the original code looked like. 
 
-#### My live notes that I took during the demo of Ghidra
+#### My checklist that I made during the Ghidra demonstration
 You get to a window 
 
 new project
@@ -79,9 +79,16 @@ Ghidra takes in ELF files analyzes the file and breaks apart the components of t
 Ghidra is super important for finding vulnerabilities, understanding malware behavior and making defenses against potential threats. 
 
 ## Overview
-For this week 
+Before we could start the challenge this week, we needed to install Ghidra, the software that was mentioned in the recap. In order to do this, we also needed to install a JDK, or Java Development kit. Also, in order to access the challenge, we needed to use the linux command "nc [server name here]". "nc" stands for "netcat" which allows you to connect to a server, however it doesn't work on the windows powershell, only linux. To get around this restriction, I went to a website called "nmap.org" and installed an extension, which allowed me to use "ncat" in place of "nc". This allowed me to access the 2 weekly challenges.
 
 
 ## Challenge of the week
+
+### Challenge 1
+For this week we needed to solve two challenges given a link to a file and the text: "rock paper scissors is a lot easier if ur opponent lets you read their mind before u start playing". I downloaded the file, went through the checklist, naming my project "first_chal". After opening the code and going through main, we found a function called "throwHands" with the inputs of "rock", "scissors", "paper", "paper", "scissors" and then printed "wow good job Here's your flag: %s\n". This function would only continue if the input would "beat" their call. Rock (tracked by 0), was beat by paper (tracked by 1), which was beat by scissors (tracked by 2), which of course was beat by rock. 
+After obtaining the inputs that the machine would use, we went into the powershell that we accessed through ncat. We were greeted by a function that asked for a name, took in your input and said "hello [userInput]". It then prompted us to play rock paper scissors using 0,1 and 2. I entered 1, 0, 2, 2, 0 sequentially in order to beat the machine, and it then printed out the flag. 
+
+### Challenge 2
+Challenge 2 seemed very similar to challenge 1 at first, 
 
 ## Reflection
