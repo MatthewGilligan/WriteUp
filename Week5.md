@@ -91,4 +91,32 @@ After obtaining the inputs that the machine would use, we went into the powershe
 ### Challenge 2
 Challenge 2 seemed very similar to challenge 1 at first, as when I accessed the file I was once again asked to enter a name. However, when I entered my name I was met with the response: "Please enter a longer name". Checking in Ghidra, we found a statement after it took the input of name that said: "if name < 0xb: [continue the program]". 0xb is the hexadecimal for 11, meaning that the name needed to be 11 digits long. It then took this name as a character array into a function called "make_moves" which outputted the rock paper scissors decisions. 
 
+#### make_moves function
+This is the exact C code for make_moves:
+
+void make_moves(char *in,int *out)
+
+{
+  int *out_local;
+  char *in_local;
+  int delta;
+  int i;
+  
+  delta = 0;
+  for (i = 0; i < 10; i = i + 1) {
+    in[i] = in[i] + (char)delta;
+    out[i] = (int)(in[i] % '\x04');
+    delta = (in[i] + 0x1ca3) % 0x15;
+  }
+  return;
+}
+
+#### Understanding the function
+The first thing that we recognized was that if it was handed the exact same characters for the "in" variable then it would always create the same output. We know that character arrays convert the characters into ascii values, with the value of a being 97. Additionally, hexadecimals are used for the line that calculates the delta variable. 0x1ca3 correlates to 7331 and 0x15 correlates to 21. This adds 7331 to the ith value of the in array, then divides by 21 and assigns delta with the remainder (modulo 21). Also, x04 representes 4, which divides by 4 and takes the remainder. 
+
+A key part of this function is that it reassigns the value of the in array by adding delta to ith value of in. This means that even though our string is all the same letter, it will not output the same thing for every iteration of the loop. 
+
+To solve this challenge, our group of four split off into two seperate groups, with one doing the math manually and another just trying to brute force it. While the brute force team did end up finishing first, my group with the math was able to fully understand the code and how our data was transformed. The out variable is assigned second, and always results in a number between 0 and 3, which will correlate to the rock paper scissors outputs. With our original string of "aaaaaaaaaaa", the code would result in a 3 being output for the 7th value, as out was being assigned to 99 % 4, but by switching the 7th value to "b" (with an ascii value of 98), we can make sure that all outputs are between 0 and 2, allowing us to beat the algorithm. (The group with all "a" also managed to beat the algorithm, but with just testing and checking). 
+
 ## Reflection
+Overall, this week was super fun and super informative. I was super excited to learn about Ghidra and ELFs, as well as get first hand experience reverse engineering code. I am very excited to be exposed to these concepts and ideas, and I definitely found this challenge super fun. I certainly want to develop in this area more, and I'm excited to keep learning!
