@@ -89,6 +89,6 @@ For this week we needed to solve two challenges given a link to a file and the t
 After obtaining the inputs that the machine would use, we went into the powershell that we accessed through ncat. We were greeted by a function that asked for a name, took in your input and said "hello [userInput]". It then prompted us to play rock paper scissors using 0,1 and 2. I entered 1, 0, 2, 2, 0 sequentially in order to beat the machine, and it then printed out the flag. 
 
 ### Challenge 2
-Challenge 2 seemed very similar to challenge 1 at first, 
+Challenge 2 seemed very similar to challenge 1 at first, as when I accessed the file I was once again asked to enter a name. However, when I entered my name I was met with the response: "Please enter a longer name". Checking in Ghidra, we found a statement after it took the input of name that said: "if name < 0xb: [continue the program]". 0xb is the hexadecimal for 11, meaning that the name needed to be 11 digits long. It then took this name as a character array into a function called "make_moves" which outputted the rock paper scissors decisions. 
 
 ## Reflection
