@@ -24,6 +24,12 @@ A commit is an entry into git history. Use git commit -m"Your commit title here"
 #### Git Status
 This command shows you if there is anything left to commit, it also gives a a brief status, and gives you your status. 
 
+#### Git log
+This command tells you your commit history with the names of your commits. 
+
+#### Git Branches
+Git uses branches that split off from each other, that can be worked on without affecting the other. 
+
 ## Overview
 Learned about git
 
