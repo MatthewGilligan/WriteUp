@@ -45,13 +45,21 @@ You can also use checkout to restore files to a specific state after a commit.
 Using git checkout to a specific commit is how you put yourself into a detached HEAD state. 
 Two alternatives for git checkout are git switch (which switches between branches) and git restore (which restores working tree files)
 
+#### Git clone
+This command clones an existing repository.
+
+#### Git add 
+This command is how you actually stage your change to be committed (git add <file-path>)
+
+#### Git blame
+This command displays the author of the changes to each line of a file
 
 
 ## Overview
-Learned about git
+For this week's challenge "git_forensics", we were tasked with recovering credentials that were hidden in git repositories. I used powershell, but it was completable with linux or any other way to ssh. This challenge was very similar to the elavator challenge from week 1, where there were multiple levels to "solve" before finding the flag. The main difference was that instead of only using linux commands, we also incorporated git commands to switch between repositories. 
 
 ## Challenge of the week
-We used git
+
 
 ## Reflction
 I enjoyed learning about git
