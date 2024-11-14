@@ -30,6 +30,15 @@ This command tells you your commit history with the names of your commits.
 #### Git Branches
 Git uses branches that split off from each other, that can be worked on without affecting the other. 
 
+#### Git reflog
+This was marked as the "Most Important" command that we learned. This command keeps track of literally everything that has happened, and is insane for debugging. It will show you previous states, so you can use other commands to "rewind time" to those states. 
+
+#### Git HEADs
+In git, a HEAD is a reference to the most recent commit on the current branch. It is like a linked list, where the HEADs are "on top" of each other. 
+There is a state called a "detached HEAD state" where any commits aren't tied to a specific branch. This state occurs when the HEAD points directly to a specific commit instead of to a branch. This is very useful for examining past commits and making temporary changes. 
+When you switch branches, HEAD moves to point to the latest commit on that specific branch. 
+HEADs can be used to restore to the previous states because they point to specific commits. 
+
 ## Overview
 Learned about git
 
