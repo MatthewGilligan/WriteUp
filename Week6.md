@@ -39,6 +39,14 @@ There is a state called a "detached HEAD state" where any commits aren't tied to
 When you switch branches, HEAD moves to point to the latest commit on that specific branch. 
 HEADs can be used to restore to the previous states because they point to specific commits. 
 
+#### Git checkout 
+The git checkout command is used to switch between branches, allowing for navigation through a project's history. You can use the git checkout command by typing "git checkout "branchName" " 
+You can also use checkout to restore files to a specific state after a commit. 
+Using git checkout to a specific commit is how you put yourself into a detached HEAD state. 
+Two alternatives for git checkout are git switch (which switches between branches) and git restore (which restores working tree files)
+
+
+
 ## Overview
 Learned about git
 
