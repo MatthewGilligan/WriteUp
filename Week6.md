@@ -109,7 +109,48 @@ Woah! All these lines line up perfectly!
 I didn't get around to storing my creds!
 Maybe check for some more branches here?
 
-Based off of this message, I knew that I wanted add checking for more branches into my search process. I started by once again ls'ing and actually found a file called credsLevel3.txt, however this file was faking me out, because the next user and password were both equal to "??????". I then used 
+Based off of this message, I knew that I wanted add checking for more branches into my search process. I started by once again ls'ing and actually found a file called credsLevel2.txt, however this file was faking me out, because the next user and password were both equal to "??????".
+After this I used git reflog, which revealed 4 changes:
+"0ba6ce9 (HEAD -> master) HEAD@{0}: checkout: moving from dontlookinhere to master
+ef4d6a5 (dontlookinhere) HEAD@{1}: commit: next time it won't be this easy 
+0ba6ce9 (HEAD -> master) HEAD@{2}: checkout: moving from master to dontlookinhere
+0ba6ce9 (HEAD -> master) HEAD@{3}: commit (initial): TODO store credentials"
+
+The changing of branches indicates a second branch called "dontlookinhere". I then used the git branch command to verify, which confirmed that there were two branches. I used the git switch command "git switch dontlookinhere" in order to switch branches to the other branch. When I used ls in this branch, I found another file called credsLevel2.txt, which contained the question marks, but also contained the username and password for level 4. 
+
+### Level 4
+Level 4's README said: " Swipa's escalated their tactics...there's a bunch of fake passwords added in. Can you figure out which line wasn't created by Swipa?" 
+After finding the creds file, I opened it with cat, and found hundreds of usernames and passwords, just like the README told me. I remembered that we could use the git blame command in order to track who edited what line. I entered "git blame credsLevel2.txt", and it just kept on generating more and more until I quit using ctrl + c to stop the generation. 
+This level stumped me for a while, because I kept trying to find a way to comb through all of the usernames and passwords with commands. I kept looking things up, but I couldn't find a solution that didn't involve generating the whole data set first. I then decided to just generate the whole data set and comb through it while I was generating it. I kept holding the "enter" key, and eventually stopped when I saw "xX_liltimmyT_Xx" as the author of the username and password, level5_1965, 062930. I entered these into su and switched to level 5.
+
+
+### Level 5
+This level was solved fairly quickly by ls'ing and finding a file called "credsLevel6.txt". I then cat'd this file and it contained the user name and password for level 6. 
+
+### Level 6
+After cd'ing into the repository, I found a file called "secretPlan.txt". Inside this file, I found the text: 
+"I'll make a secret branch...
+and add my creds to creds_level7.txt
+and then commit that file...
+and then delete that file...
+and then delete the branch...
+and then forget to clear something very important...
+it will be impossible to find my creds...
+perfect security achieved. no thanks to swipa"
+
+I got distracted by the part about a secret branch, and used the git branch command, only to see that there was only one master branch in this repository. I then even used "git checkout master" in hopes that master was somehow the secret branch. I then remembered the part about the deltion of the branch, I checked git reflog in order to see when the branch was deleted and checkout to when the branch existed. Git reflog revealed: 
+"fa1fdc7 (HEAD -> master) HEAD@{0}: checkout: moving from fa1fdc7601b6510633e700ffcad5ac488e95ba43 to master
+fa1fdc7 (HEAD -> master) HEAD@{1}: checkout: moving from master to fa1fdc7
+fa1fdc7 (HEAD -> master) HEAD@{2}: checkout: moving from supersecretcredentialbranch to master
+d6ec4d6 HEAD@{3}: commit: deleted! time to delete the branch now...
+67cdd87 HEAD@{4}: commit: stored my credentials! now I'll delete them
+fa1fdc7 (HEAD -> master) HEAD@{5}: checkout: moving from master to supersecretcredentialbranch
+fa1fdc7 (HEAD -> master) HEAD@{6}: commit (initial): secret plan phase 1 - planning "
+
+I saw where the branch had been deleted, so I used git checkout to 67cdd87, the commit where they "stored my credentials! now I'll delete them". I then used ls to reveal a new file called credsLevel7.txt. I opend this file and it revealed the user name and password for level 7. 
+
+### Level 7
+
 
 
 
