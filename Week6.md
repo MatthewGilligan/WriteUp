@@ -2,9 +2,10 @@
 ## Matthew Gilligan
 
 ## Recap
-This week we learned about Git, and how to use it to navigate through files, undo, load previous states, create repos/branches, and see all changes made to a directory or repository. 
+This week we learned about Git, and how to use it to navigate through files, undo, load previous states, create repos/branches, and see all changes made to a directory or repository. I've used gitHub, and gitKraken before, so I knew the basic applications of git (to hold and merge information), but I didn't know any of the actual language of git. 
 
 We began by talking about how linux/ unix systems are very good at deleting and creating things, and there is no undoing them. They will even allow you to brick your computer if you want to and know how to. We then talked about how about how Git is complimentary to these systems, as it can be used to save progress and create "branches" of a project that each do different things.  
+
 
 ### Demo
 At the start of the class we saw a demo.
@@ -122,7 +123,7 @@ The changing of branches indicates a second branch called "dontlookinhere". I th
 Level 4's README said: " Swipa's escalated their tactics...there's a bunch of fake passwords added in. Can you figure out which line wasn't created by Swipa?" 
 After finding the creds file, I opened it with cat, and found hundreds of usernames and passwords, just like the README told me. I remembered that we could use the git blame command in order to track who edited what line. I entered "git blame credsLevel2.txt", and it just kept on generating more and more until I quit using ctrl + c to stop the generation. 
 This level stumped me for a while, because I kept trying to find a way to comb through all of the usernames and passwords with commands. I kept looking things up, but I couldn't find a solution that didn't involve generating the whole data set first. I then decided to just generate the whole data set and comb through it while I was generating it. I kept holding the "enter" key, and eventually stopped when I saw "xX_liltimmyT_Xx" as the author of the username and password, level5_1965, 062930. I entered these into su and switched to level 5.
-
+(Later, I found out that I could've used git log "log.txt" to put all of the entries into a txt file and use a regular expression (regex) that searches through the file. I do not currently have a solid grasp on regexes, but I definitely want to learn more, because they seem really useful)
 
 ### Level 5
 This level was solved fairly quickly by ls'ing and finding a file called "credsLevel6.txt". I then cat'd this file and it contained the user name and password for level 6. 
@@ -150,9 +151,27 @@ fa1fdc7 (HEAD -> master) HEAD@{6}: commit (initial): secret plan phase 1 - plann
 I saw where the branch had been deleted, so I used git checkout to 67cdd87, the commit where they "stored my credentials! now I'll delete them". I then used ls to reveal a new file called credsLevel7.txt. I opend this file and it revealed the user name and password for level 7. 
 
 ### Level 7
+Level 7's README said: 
+"Sigh... I guess I'll stop using git for my credentials :(
+...
+...
+...
+I'll keep them in in /flag7.txt!" 
 
+When I used ls, I only saw README, so I tried ls -a, thinking that it would reveal flag7.txt, however, it revealed 3 other files. These were ".bash_logout", ".bashrc" and ".profile". cat'ing .bash_logout just said that it was executed when the login shell ends, and that it clears the screen. cat'ing .profile gave information regarding setting PATH so it would include a user's private bin, given that the bin exists. I then tried to use git status, but I wasn't in a repository so this didn't work. I thought that I would need to create or clone a repository and then search through it, so I used git init to create a new repository. I then used git reflog to confirm that it was new (which it was. It said: fatal: your current branch 'master' does not have any commits yet). I then tried entering "/flag7.txt", but was told "-bash: /flag7.txt Permission Denied". I then used ls and found a gigantic list of all of the levels that were used in this challenge. I re-entered the user name and password for level_7_1965, which was the one that I got from level 6. After getting back to what was essentially the start of level 7 again, I tried to just cat /flag7.txt even though I didn't see it listed with ls. This actually worked, and I got the flag to submit for points. 
 
+##### Why could I read that file without seeing it?
+I was very confused as to why I could read this file without seeing it listed under ls, even after using ls -a, which is supposed to reveal all hidden files. I asked copilot and here were the reasons that it thought could be it. 
+1) Hidden files
+2) Different directory listing
+3) File permissions
+4) Symbolic links
+5) Wildcards or patterns
 
+I don't that that is was 1 or 2, as I already checked the hidden files, and there were no other directories. It could've been 3, as I didn't check the permissions of the file. It also could be 5, as maybe something overlooked it, but I doubt it.
+I didn't understand what 4 was, so I asked it to explain, and it told me that symbolic links are special types of files that point to another file or directory. 
+They act as shortcuts, allowing us to access the target file using a symbolic link. If /flag7.txt was a symbolic link, it might not be listed when using ls due to directory permissions. Also, using cat on /flag7.txt would follow the symbolic link and display the contents of the target file, even if the symbolic link wasn't displayed by ls. Allow these factors lead me to belive that /flag7.txt was a symbolic link, making number 4 the reason I couldn't see it, but still read it. 
 
 ## Reflction
-I enjoyed learning about git
+I enjoyed this lesson in git forensics, and I am happy that I finished this challenge. I had never used the actual git language before (only gitHub and gitKraken), so I was very excited to learn more. I actually really enjoyed learning about git and using it in combination with linux commands, but I think that I'll keep doing these writeups in gitHub, not the actual git. Overall it was another fun and informative week!
+
