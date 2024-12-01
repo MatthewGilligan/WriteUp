@@ -22,7 +22,21 @@ This week we had three flags that we needed to find through breaking into an exa
 For additional resources and help, we were given the webisite https://book.hacktricks.xyz/pentesting-web/sql-injection , which listed out additional tips and strategies for using sql injection to bypass entry point detection. 
 
 ## Challenge of the week
-There was a website. We entered various prompts in order to find the 3 flags
+After going to the webiste, our team quickly reaized that we should try to log in as an admin in order to gain better information about the website and unlock more permissions.
+
+### Flag 1
+I used the SQL injection 'or 1=1; -- in order to make the password evaluate as true, confusing the website to let me past the initial detection. This revealed a database of all of the people who were logging in. In order to fully see the database, we used the command "'select * from users where username = '' and password = 'pass' or 1=1 -- word'" which revealed everyone logging in. We were told that we were supposed to look for anything out of the ordinary, so when one person named themselves "flag", it really threw off our group. We spent a lot of time tying to get the log in details of that user, until we realized that we were supposed to get the log in details of the admin account. After realizing that we needed to log in as the admin account, we stopped going after the fake "flag" and went back to looking for the admin. 
+We used the command " ' or username='admin'; -- " in order to get the admin log in. This worked because the command becomes select * from users where username='random username' password='' or username='Admin'; -- ' which will select the admin user. The admin user was the first flag, which we submitted and got the points for. 
+
+### Flag 3 (the second flag we found)
+For the second flag that we found, we accidently found flag 3 first instead of flag 2. This was apparently pretty common, as flag 2 was pretty easy to miss, and flag 3 was further down that path that we were already going on. After we had the admin log in, we were able to use "Admin'; -- " as the log in for the admin account, which gave us more permissions and information. We accessed the informtion schema tables with the add on of "from information_schema.tables". We used the command "' union select table_name, null from information_schema.tables -- " We then found a list, which listed out the table names, one of which was called "secret". We found that the secrets table looked like "username: secrets, score: null". We accessed the information of secret by using the command "' union select secret, null from secrets -- " which revealed the secret, which was flag 3. 
+
+### Flag 2 (the third flag that we found)
+For the third flag we found, we went back into the 
+
+
+
+
 
 ## Reflection 
 This was a really fun week. Even the AI wouldn't help me learn SQL injection, so it was really cool that I got to learn the basics. I will make sure to be ethical about this new skill and not hack into stuff (not that I could even if I wanted to)
