@@ -32,11 +32,8 @@ We used the command " ' or username='admin'; -- " in order to get the admin log 
 For the second flag that we found, we accidently found flag 3 first instead of flag 2. This was apparently pretty common, as flag 2 was pretty easy to miss, and flag 3 was further down that path that we were already going on. After we had the admin log in, we were able to use "Admin'; -- " as the log in for the admin account, which gave us more permissions and information. We accessed the informtion schema tables with the add on of "from information_schema.tables". We used the command "' union select table_name, null from information_schema.tables -- " We then found a list, which listed out the table names, one of which was called "secret". We found that the secrets table looked like "username: secrets, score: null". We accessed the information of secret by using the command "' union select secret, null from secrets -- " which revealed the secret, which was flag 3. 
 
 ### Flag 2 (the third flag that we found)
-For the third flag we found, we went back into the 
-
-
-
+For the third flag we found, we went back into the normal users table, and with a hint that was put on the board to "find the usernames and passwords" we used the command ' union select username, password from users -- we were able to find the usernames and passwords from all of the users. One of these users had the flag as their password, which we submitted for the full points. 
 
 
 ## Reflection 
-This was a really fun week. Even the AI wouldn't help me learn SQL injection, so it was really cool that I got to learn the basics. I will make sure to be ethical about this new skill and not hack into stuff (not that I could even if I wanted to)
+This was a really fun week! I remember back in the deadface CTF event I was very stumped about how to break into websites, so it was really fun and interesting to learn how to use basic SQL injection. Even the AI wouldn't help me learn SQL injection, so it was really cool that I got to learn the basics. I am definitely going to be using the hacktricks website, and I'm excited to learn more!
