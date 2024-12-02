@@ -13,6 +13,10 @@ Using one of these XOR gates, you could hypothetically XOR a file with some rand
 A major pro for using these OTPs is that they are usually very secure, and no one can read your encrypted file without your key. However, a potential con with this approach is that it is vulnerable to collisions. Collisions are where two different inputs produce the same output. This means that with enough "brute force" attacks using the right logic, someone could replicate the so-called "unreplicable" key. 
 
 ### File Magick
+Another thing that we covered in the introductory slides was file magick. File magick is the meta data assigned to each type of file extension. This data is displayed in the form of a sequence of numbers called "magick bytes". Some files will have multiple types of bytes while others will only  have 1 sequence. ELF binaries will always start with  7f 45 4c 46, while ZIP archives always start with 50 4b. One thing to consider and be aware of is that some of these files may have magic bytes near the beginning of the file, but not directly at the beginning. The best way to determine the magick bytes of different types of files is by using wikipedia. 
+
+### Hash functions
+Hash functions are mathematical algorithms that take an input 
 
 
 ## Overview
