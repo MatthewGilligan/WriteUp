@@ -27,7 +27,13 @@ For the challenge of the week, all we were given was a zip file that contained a
 Starting out, we identified an essential part of the python script that was the variable "secretKey". Secret key was an mp5 hash that took in the hostname, the str value of "randomThing" (a randint between 1 and 1333337) and the time. This hash was then used in a function called "Encrypt()" that XOR'd the contents of the file with the hash and also added ".ohio" to the end of the encryted file. 
 
 ### First attempt at breaking the hash
-For our first attempt at breaking the hash, we set up a for loop that iterated from all integer values from 1 to 1333337 (the possible values of randomThing), checking the md5 hash with the logic of md5(timmy + str [i] + "2024-11-24".) This hash didn't work. 
+For our first attempt at breaking the hash, we set up a for loop that iterated from all integer values from 1 to 1333337 (the possible values of randomThing), checking the md5 hash with the logic of md5(timmy + str [i] + "2024-11-24".) This hash didn't work for multiple reasons, the main one being that the hostname was not timmy. Also, as we would later realize, the time was also off. 
+
+### Searching for the hostname
+Looking through the ransomware file, we found a line in part of the encrypt_and_upload function that uploaded the file as "victim" + the id. Going back into the website, we appended "/victim3" (as we knew that the id was 3 from the start of the challenge). This took us to a new page, which displayed the hostname, username and time. It turns out that the hostname was actually the first flag, which we submitted. 
+
+### Second attempt at breaking the hash
+After finally finding the hostname and correct time, we were able to reconstruct our for loop. This loops went through all of the values from 1 to 1333337 and compared our hash with str value i to the original hash with an unknown str value. Eventually, at i = 502651, our loop returned a match and stopped. Now we finally had the complete md5 hash. 
 
 ## Reflection
 Wow, crazy cool week. Learned a lot. My first intoduction to cryptography. 
