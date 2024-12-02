@@ -16,14 +16,18 @@ A major pro for using these OTPs is that they are usually very secure, and no on
 Another thing that we covered in the introductory slides was file magick. File magick is the meta data assigned to each type of file extension. This data is displayed in the form of a sequence of numbers called "magick bytes". Some files will have multiple types of bytes while others will only  have 1 sequence. ELF binaries will always start with  7f 45 4c 46, while ZIP archives always start with 50 4b. One thing to consider and be aware of is that some of these files may have magic bytes near the beginning of the file, but not directly at the beginning. The best way to determine the magick bytes of different types of files is by using wikipedia. 
 
 ### Hash functions
-Hash functions are mathematical algorithms that take an input 
-
+Hash functions are mathematical algorithms that take an input, and return a string of bytes as an output. They transform data and create a unique output for a given input, making them very useful at securing information. The main properties of hash functions are that they are deterministic (produce the same output for the same input), have pre-image resistance (it's very difficult to find the original input), and are collision resistant (it should be very hard to get the same output with the same input). All of these factor mean that a small change in the input can create a drastic change in the output. The hashes that we went over were MD5, sha 1, sha 3 and poly1305. Of these, md5 and sha1 were considered broken, and poly1305 is considered kind of broken. A hash being "broken" means that it's trivial to compute collisions for the hash, making them less secure. 
 
 ## Overview
-3 flags again. We didn't find the last one in time.
+For this week's challenge, the recurring character Timmy and his friend Jimmy both got hit with ransomware. We needed to recover these files and find the 3 flags hidden in the various files. This challenge required real ransomware that was commented out. If at any time you deleted the comment from the top of the ransomware file and ran it on your computer, you would get hit with actual ransomware without a key to restore your files. It was made very clear to not run this ransomware, to not distribute this ransomware and to just read the script and analyze what it does. 
 
 ## Challenge of the week
-Really hard stuff this week. 
+For the challenge of the week, all we were given was a zip file that contained a text file as well as two other encrypted files and a python script that contained the malware. The text fille told us that "you've been mogged lol" and gave a link to a website with id of 3 to recover the files. Going to the website, it told us that told us to pay "5.3 sigmacoin to the address of _N2XNQAFHZ7ZVY7OFDXAVYNMN27KLGBSEFD6GK5XHLTATZFJI36UA_ by 2024-11-24" to get the files back. Part of our team tried to track down the address while the other team searched through the file. Eventually, both halves of the team merged in order to look through the file as we realized that the address wasn't relevant. 
+
+Starting out, we identified an essential part of the python script that was the variable "secretKey". Secret key was an mp5 hash that took in the hostname, the str value of "randomThing" (a randint between 1 and 1333337) and the time. This hash was then used in a function called "Encrypt()" that XOR'd the contents of the file with the hash and also added ".ohio" to the end of the encryted file. 
+
+### First attempt at breaking the hash
+For our first attempt at breaking the hash, we set up a for loop that iterated from all integer values from 1 to 1333337 (the possible values of randomThing), checking the md5 hash with the logic of md5(timmy + str [i] + "2024-11-24".) This hash didn't work. 
 
 ## Reflection
 Wow, crazy cool week. Learned a lot. My first intoduction to cryptography. 
